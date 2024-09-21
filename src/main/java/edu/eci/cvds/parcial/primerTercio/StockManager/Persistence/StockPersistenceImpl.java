@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-public class StockPersistenceImpl implements StockPersistenceInterface{
+public class StockPersistenceImpl implements StockPersistenceInterface, NotifierAgentInterface{
     private HashMap<String, Product> stock = new HashMap<>();
     private List<AgentInerface> agents;
 
@@ -18,7 +18,8 @@ public class StockPersistenceImpl implements StockPersistenceInterface{
         agents.add(alertAgent);
     }
 
-    private void notifyAgentsOfAProductUpdate(String productName, int productQuantity){
+    @Override
+    public void notifyAgentsOfAProductUpdate(String productName, int productQuantity){
         for (AgentInerface agent : agents){
             agent.updateProduct(productName, productQuantity);
         }
@@ -27,14 +28,22 @@ public class StockPersistenceImpl implements StockPersistenceInterface{
     @Override
     public Product addProduct(Product product) {
         if (stock.containsKey(product.getName())){
-            Product oldProduct = stock.get(product.getName());
-            stock.put(
+            return null;
         }
+        stock.put(product.getName(), product);
+        return product;
     }
 
     @Override
     public Product updateProduct(String name, int quantity) {
-        return null;
+        if (!stock.containsKey(name)){
+            return null;
+        }
+        Product product = stock.get(name);
+        product.setQuantity(quantity);
+        stock.put(name, product);
+        notifyAgentsOfAProductUpdate(name, quantity);
+        return product;
     }
 }
 
