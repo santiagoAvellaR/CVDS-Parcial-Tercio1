@@ -14,7 +14,7 @@ public class StockController implements StockControllerInterface{
 
 
     @Override
-    @PostMapping("/createdProdcut")
+    @PostMapping("/createdProduct")
     @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody Product product) {
         return stockService.addProduct(product);
