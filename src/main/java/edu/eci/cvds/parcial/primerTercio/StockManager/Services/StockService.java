@@ -2,15 +2,14 @@ package edu.eci.cvds.parcial.primerTercio.StockManager.Services;
 
 import edu.eci.cvds.parcial.primerTercio.StockManager.Model.Product;
 import edu.eci.cvds.parcial.primerTercio.StockManager.Persistence.StockPersistenceInterface;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class StockService implements StockServiceInterface {
     private final StockPersistenceInterface stockPersistence;
 
-    public StockService(StockPersistenceInterface stockPersistence) {
-        this.stockPersistence = stockPersistence;
-    }
     @Override
     public Product addProduct(Product product){
         return stockPersistence.addProduct(product);

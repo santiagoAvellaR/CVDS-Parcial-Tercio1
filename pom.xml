@@ -79,6 +79,15 @@
 						</goals>
 						<configuration>
 							<excludes>
+								<exclude>
+									edu/eci/cvds/parcial/primerTercio/StockManager/StockManagerApplication.class
+								</exclude>
+								<exclude>
+									edu/eci/cvds/parcial/primerTercio/StockManager/Controllers/*
+								</exclude>
+								<exclude>
+									edu/eci/cvds/parcial/primerTercio/StockManager/Services/*
+								</exclude>
 							</excludes>
 						</configuration>
 					</execution>

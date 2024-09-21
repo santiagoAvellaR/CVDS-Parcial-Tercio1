@@ -6,4 +6,6 @@ public interface StockPersistenceInterface {
     Product addProduct(Product product);
     Product updateProduct(String id, int quantity);
 
+    void cleanStock();
+
 }

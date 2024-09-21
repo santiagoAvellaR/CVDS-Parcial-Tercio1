@@ -5,15 +5,16 @@ import edu.eci.cvds.parcial.primerTercio.StockManager.Model.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Component
 public class StockPersistenceImpl implements StockPersistenceInterface, NotifierAgentInterface{
     private HashMap<String, Product> stock = new HashMap<>();
-    private List<AgentInerface> agents;
+    private ArrayList<AgentInerface> agents;
 
     public StockPersistenceImpl(@Qualifier("logAgent") AgentInerface logAgent, @Qualifier("alertAgent") AgentInerface alertAgent){
+        agents = new ArrayList<>();
         agents.add(logAgent);
         agents.add(alertAgent);
     }
@@ -44,6 +45,10 @@ public class StockPersistenceImpl implements StockPersistenceInterface, Notifier
         stock.put(name, product);
         notifyAgentsOfAProductUpdate(name, quantity);
         return product;
+    }
+
+    public void cleanStock(){
+        stock.clear();
     }
 }
 

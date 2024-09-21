@@ -2,17 +2,16 @@ package edu.eci.cvds.parcial.primerTercio.StockManager.Controllers;
 
 import edu.eci.cvds.parcial.primerTercio.StockManager.Model.Product;
 import edu.eci.cvds.parcial.primerTercio.StockManager.Services.StockServiceInterface;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/StockManager")
+@RequiredArgsConstructor
 public class StockController implements StockControllerInterface{
     private final StockServiceInterface stockService;
 
-    public StockController(StockServiceInterface stockService) {
-        this.stockService = stockService;
-    }
 
     @Override
     @PostMapping("/createdProdcut")
